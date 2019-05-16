@@ -1,0 +1,55 @@
+{
+  "name": "marketing-app",
+  "version": "1.0.0",
+  "description": "Allows users purchase goods",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run build && node dist/bin/www.js",
+    "clean": "rm -rf dist",
+    "prebuild": "npm run clean",
+    "build": "babel src -d dist",
+    "dev": "nodemon --watch src --delay 250ms --exec babel-node src/bin/www.js --ignore tests/",
+    "test": "cross-env NODE_ENV=test nyc --reporter=html mocha --require @babel/register ./src/tests/* --no-deprecation  --timeout 1000000 --exit  && nyc report"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DinmaOtutu/marketing-app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DinmaOtutu/marketing-app/issues"
+  },
+  "homepage": "https://github.com/DinmaOtutu/marketing-app#readme",
+  "dependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.2",
+    "@babel/node": "^7.2.2",
+    "@babel/preset-env": "^7.3.1",
+    "@babel/register": "^7.0.0",
+    "bcrypt": "^3.0.6",
+    "body-parser": "^1.19.0",
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.1",
+    "cors": "^2.8.5",
+    "coveralls": "^3.0.3",
+    "cross-env": "^5.2.0",
+    "dotenv": "^7.0.0",
+    "express": "^4.16.4",
+    "express-validator": "^5.3.1",
+    "helmet": "^3.16.0",
+    "jsonwebtoken": "^8.5.0",
+    "mocha": "^6.0.2",
+    "moment": "^2.24.0",
+    "morgan": "^1.9.1",
+    "nodemon": "^1.18.11",
+    "nyc": "^13.3.0",
+    "winston": "^3.2.1"
+  },
+  "devDependencies": {
+    "babel-plugin-add-module-exports": "^1.0.0",
+    "eslint": "^5.15.2",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.16.0"
+  }
+}
