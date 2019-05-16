@@ -4,7 +4,7 @@ const app = Router();
 
 app.get('/', (req, res) => {
   res.status(200).json({
-    message: 'Welcome to population management API'
+    message: 'Welcome to MARKETING API'
   });
 });
 
