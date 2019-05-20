@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import dotenv from 'dotenv';
 import { Sequelize } from 'sequelize';
 import app from '../app';
