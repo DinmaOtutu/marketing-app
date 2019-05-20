@@ -42,8 +42,13 @@
     "mocha": "^6.0.2",
     "moment": "^2.24.0",
     "morgan": "^1.9.1",
+    "mysql": "^2.17.1",
+    "mysql2": "^1.6.5",
     "nodemon": "^1.18.11",
     "nyc": "^13.3.0",
+    "sequelize": "^5.8.6",
+    "sequelize-auto": "^0.4.29",
+    "sequelize-cli": "^5.4.0",
     "winston": "^3.2.1"
   },
   "devDependencies": {

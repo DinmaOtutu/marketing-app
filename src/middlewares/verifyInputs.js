@@ -1,10 +1,10 @@
 import errorValidationHandler from './errorHandler';
 
 const verifyUserInput = {
-  exampleRequestBody: (req, res, next) => {
-    req.check('female', 'number of female number is required').trim().notEmpty();
-    req.check('male', ' number of male is required').trim().notEmpty();
-    
+  registerCustomerRequestBody: (req, res, next) => {
+    req.check('name', 'name is required').trim().notEmpty();
+    req.check('email', 'email is required').trim().notEmpty();
+    req.check('password', 'password is required').trim().notEmpty();
     errorValidationHandler(req, res, next);
   },
 };
