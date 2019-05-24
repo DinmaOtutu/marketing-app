@@ -48,7 +48,7 @@ class CustomerController {
   }
 
   /**
-   * @description Register a customer and return the customer with a token
+   * @description Login with email and password and return the customer with a token if successful
    * @param {Object} req - Http Request object
    * @param {Object} res - Http Response object
    * @returns {Object} customer with a token
