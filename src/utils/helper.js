@@ -8,12 +8,12 @@ const SALT_WORK_FACTOR = bcrypt.genSaltSync(5);
 const helper = {
   // Hash password with bcrypt
   hashPassword: async (plaintextPassword, saltFactor = SALT_WORK_FACTOR) => {
-    const hash = await bcrypt.hashSync(plaintextPassword, saltFactor);
+    const hash = await bcrypt.hash(plaintextPassword, saltFactor);
     return hash;
   },
   // compare hashed password
   comparePassword: async (plaintextPassword, hashPassword) => {
-    const compare = await bcrypt.compareSync(plaintextPassword, `${hashPassword}`);
+    const compare = await bcrypt.compare(plaintextPassword, `${hashPassword}`);
     return compare;
   },
   // generate token
