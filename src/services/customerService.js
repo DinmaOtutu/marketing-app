@@ -1,6 +1,7 @@
 /* eslint-disable import/no-cycle */
 import CustomerRepository from '../repositories/customerRepository';
 import helper from '../utils/helper';
+
 /**
  * @description Customer service class
  * @class CustomerService
@@ -31,7 +32,23 @@ class CustomerService {
     if (customer) {
       return customer;
     }
-    return console.log('no customer');
+    return ('no customer');
+  }
+
+  /**
+     * @description login in a customer
+     * @param {Object} email login details
+     * @param {Object} password details from database
+     * @returns {Object} customer login details
+     */
+  static async LoginCustomer(email, password) {
+    const res = await CustomerRepository.LoginCustomer(email);
+    const match = await helper.comparePassword(password, res.password);
+    const response = {
+      match,
+      id: res.customer_id
+    };
+    return response;
   }
 }
 

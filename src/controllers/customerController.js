@@ -19,7 +19,7 @@ class CustomerController {
     const { name, email, password } = req.body;
     const customerBody = {
       name,
-      email,
+      email: email.toLowerCase(),
       password
     };
     const customerId = await CustomerService.RegisterCustomer(customerBody);
@@ -45,6 +45,35 @@ class CustomerController {
         expires_in: process.env.TOKEN_EXPIRES_IN
       }
     );
+  }
+
+  /**
+   * @description Register a customer and return the customer with a token
+   * @param {Object} req - Http Request object
+   * @param {Object} res - Http Response object
+   * @returns {Object} customer with a token
+   */
+  static async LoginCustomer(req, res) {
+    const { email, password } = req.body;
+    const resp = await CustomerService.LoginCustomer(email, password);
+    if (resp.match) {
+      const customer = await CustomerService.GetCustomerById(resp.id);
+      const payload = {
+        email: customer.email,
+        name: customer.name,
+        id: customer.customer_id
+      };
+      return res.status(200).json({
+        customer: {
+          schema: customer
+        },
+        accessToken: `Bearer ${helper.generateToken('UserLogin', payload)}`,
+        expires_in: process.env.TOKEN_EXPIRES_IN
+      });
+    }
+    return res.status(401).json({
+      message: 'Invalid Credentials'
+    });
   }
 }
 
