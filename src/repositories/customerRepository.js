@@ -28,6 +28,25 @@ class CustomerRepository {
   }
 
   /**
+     * @description check for existing user by email
+     * @param {Object} email - get user by email
+     * @returns {Object} returns a response
+     */
+  static async LoginCustomer(email) {
+    try {
+      const getExistingUser = await sequelize.query('CALL customer_get_login_info(:email)', {
+        replacements: {
+          email
+        },
+        type: sequelize.QueryTypes.SELECT
+      });
+      return getExistingUser[0]['0'];
+    } catch (error) {
+      return error;
+    }
+  }
+
+  /**
      * @description get a single customer by Id
      * @param {Number} customerId
      * @returns {Object} returns a single customer with this Id from the datastore
@@ -42,7 +61,7 @@ class CustomerRepository {
       });
       return response[0]['0'];
     } catch (error) {
-      console.log(error);
+      return error;
     }
   }
 }
