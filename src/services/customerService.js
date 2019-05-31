@@ -53,6 +53,7 @@ class CustomerService {
   static async LoginCustomer(email, password) {
     try {
       const res = await CustomerRepository.LoginCustomer(email);
+      console.log(res, password);
       const match = await helper.comparePassword(password, res.password);
       const response = {
         match,

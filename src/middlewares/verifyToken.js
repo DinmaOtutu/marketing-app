@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 
 const verifyToken = (req, res, next) => {
   // eslint-disable-next-line no-undef
-  const bearerHeader = req.headers.user_key;
+  const bearerHeader = req.headers['user-key'];
 
   if (!bearerHeader) return res.status(401).json({ error: 'Authentication failed....' });
   const token = bearerHeader.split(' ')[1];
