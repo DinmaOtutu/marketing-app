@@ -51,13 +51,17 @@ class CustomerService {
      * @returns {Object} customer login details
      */
   static async LoginCustomer(email, password) {
-    const res = await CustomerRepository.LoginCustomer(email);
-    const match = await helper.comparePassword(password, res.password);
-    const response = {
-      match,
-      id: res.customer_id
-    };
-    return response;
+    try {
+      const res = await CustomerRepository.LoginCustomer(email);
+      const match = await helper.comparePassword(password, res.password);
+      const response = {
+        match,
+        id: res.customer_id
+      };
+      return response;
+    } catch (error) {
+      throw error;
+    }
   }
 
   /**

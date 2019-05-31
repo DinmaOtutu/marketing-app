@@ -2,6 +2,7 @@
 import { Router } from 'express';
 import customerRouter from './customer';
 import categoryRouter from './catergory';
+import stripeRouter from './stripe';
 
 const app = Router();
 
@@ -11,6 +12,7 @@ app.get('/', (req, res) => {
   });
 });
 
+app.use('/', stripeRouter);
 app.use('/', customerRouter);
 app.use('/', categoryRouter);
 
