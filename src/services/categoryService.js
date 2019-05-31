@@ -54,7 +54,7 @@ class CategoryService {
       if (product) {
         return product;
       }
-      throw new Error('No categories yet');
+      throw new Error('No products yet');
     } catch (error) {
       throw error;
     }
@@ -72,7 +72,7 @@ class CategoryService {
       if (product) {
         return product;
       }
-      throw new Error('No categories yet');
+      throw new Error('No department yet');
     } catch (error) {
       throw error;
     }
