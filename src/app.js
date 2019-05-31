@@ -8,7 +8,6 @@ import expressValidator from 'express-validator';
 import routes from './routes/index';
 
 const app = express();
-
 app.use(cors());
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
@@ -34,5 +33,4 @@ app.use('*', (req, res, next) => {
   });
   next();
 });
-
 export default app;
