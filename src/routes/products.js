@@ -1,5 +1,5 @@
+/* eslint-disable import/no-cycle */
 import { Router } from 'express';
-// eslint-disable-next-line import/no-cycle
 import ProductsController from '../controllers/productsController';
 import verifyToken from '../middlewares/verifyToken';
 

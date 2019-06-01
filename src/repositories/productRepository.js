@@ -129,8 +129,7 @@ class ProductsRepository {
           inAllWords,
           inShortProductDescriptionLength: descriptionLength,
           inProductsPerPage: limit,
-          inStartItem: page,
-          
+          inStartItem: page
         }
       }, {
         type: sequelize.QueryTypes.SELECT,
