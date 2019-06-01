@@ -2,8 +2,14 @@
 import { Router } from 'express';
 import customerRouter from './customer';
 import orderRouter from './order';
-import shoppingCartRoute from './shoppingCart';
-import shippingRoute from './shipping';
+import shoppingCartRouter from './shoppingCart';
+import shippingRouter from './shipping';
+import categoryRouter from './catergory';
+import stripeRouter from './stripe';
+import attributesRouter from './attributes';
+import departmentsRouter from './departments';
+import productsRouter from './products';
+import taxsRouter from './taxs';
 
 const app = Router();
 
@@ -13,9 +19,15 @@ app.get('/', (req, res) => {
   });
 });
 
+app.use('/', stripeRouter);
 app.use('/', customerRouter);
 app.use('/orders', orderRouter);
-app.use('/shoppingcart', shoppingCartRoute);
-app.use('/shipping/regions', shippingRoute);
+app.use('/shoppingcart', shoppingCartRouter);
+app.use('/shipping/regions', shippingRouter);
+app.use('/', categoryRouter);
+app.use('/', attributesRouter);
+app.use('/', departmentsRouter);
+app.use('/', productsRouter);
+app.use('/', taxsRouter);
 
 export default app;

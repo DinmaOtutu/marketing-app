@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 /* eslint-disable import/no-cycle */
 import CustomerRepository from '../repositories/customerRepository';
 import helper from '../utils/helper';
@@ -13,13 +14,17 @@ class CustomerService {
      * @returns {Number} returns a newly created customer ID from the repository
      */
   static async RegisterCustomer(customer) {
-    const customerData = {
-      name: customer.name,
-      email: customer.email,
-      password: await helper.hashPassword(customer.password)
-    };
-    const customerId = await CustomerRepository.RegisterCustomer(customerData);
-    return customerId;
+    try {
+      const customerData = {
+        name: customer.name,
+        email: customer.email,
+        password: await helper.hashPassword(customer.password)
+      };
+      const customerId = await CustomerRepository.RegisterCustomer(customerData);
+      return customerId;
+    } catch (error) {
+      throw error;
+    }
   }
 
   /**
@@ -28,11 +33,15 @@ class CustomerService {
      * @returns {Object} returns a single customer with this Id from the repository
      */
   static async GetCustomerById(id) {
-    const customer = await CustomerRepository.GetCustomerById(id);
-    if (customer) {
-      return customer;
+    try {
+      const customer = await CustomerRepository.GetCustomerById(id);
+      if (customer) {
+        return customer;
+      }
+      throw new Error('User does not exist');
+    } catch (error) {
+      throw error;
     }
-    return ('no customer');
   }
 
   /**
@@ -42,14 +51,101 @@ class CustomerService {
      * @returns {Object} customer login details
      */
   static async LoginCustomer(email, password) {
-    const res = await CustomerRepository.LoginCustomer(email);
-    const match = await helper.comparePassword(password, res.password);
-    const response = {
-      match,
-      id: res.customer_id
-    };
-    return response;
+    try {
+      const res = await CustomerRepository.LoginCustomer(email);
+      console.log(res, password);
+      const match = await helper.comparePassword(password, res.password);
+      const response = {
+        match,
+        id: res.customer_id
+      };
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  /**
+     * @description register a customer
+     * @param {Object} customerBody - customer to be created
+     * @param {Number} customerId - customer to be created
+     * @returns {Object} returns a newly created customer ID from the repository
+     */
+  static async updateCustomer(customerBody) {
+    try {
+      const {
+        address_1, address_2,
+        city,
+        region,
+        country,
+        postal_code,
+        customerId,
+        shipping_region_id
+      } = customerBody;
+      await CustomerRepository.updateCustomer({
+        customerId,
+        address_1,
+        address_2,
+        city,
+        region,
+        country,
+        postal_code,
+        shipping_region_id
+      });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  /**
+     * @description register a customer
+     * @param {Object} customerBody - customer to be created
+     * @param {Number} customerId - customer to be created
+     * @returns {Object} returns a newly created customer ID from the repository
+     */
+  static async updateCustomerAccount(customerBody) {
+    try {
+      const {
+        name, email,
+        password,
+        day_phone,
+        eve_phone,
+        mob_phone,
+        customerId,
+      } = customerBody;
+      await CustomerRepository.updateCustomerAccount({
+        customerId,
+        name,
+        email,
+        password,
+        day_phone,
+        eve_phone,
+        mob_phone,
+      });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  /**
+     * @description register a customer
+     * @param {Object} customerBody - customer to be created
+     * @param {Number} customerId - customer to be created
+     * @returns {Object} returns a newly created customer ID from the repository
+     */
+  static async updateCustomerCreditCard(customerBody) {
+    try {
+      const {
+        credit_card,
+        customerId,
+      } = customerBody;
+      await CustomerRepository.updateCustomerCreditCard({
+        customerId,
+        credit_card
+      });
+    } catch (error) {
+      throw error;
+    }
   }
 }
-
 export default CustomerService;

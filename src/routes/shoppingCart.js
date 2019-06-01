@@ -16,7 +16,4 @@ router.get('/totalAmount/:cart_id', verifyUserInput.getCartId, ShoppingCartContr
 router.get('/getSaved/:cart_id', verifyUserInput.getCartId, ShoppingCartController.GetSavedProducts);
 router.get('/:cart_id', verifyUserInput.getCartId, ShoppingCartController.GetProductsInCart);
 
-
-router.get('/product/:page/:count/:length', ShoppingCartController.Getproduct);
-
 export default router;

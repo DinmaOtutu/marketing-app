@@ -45,7 +45,14 @@ const verifyUserInput = {
   getShippingRegionId: (req, res, next) => {
     req.check('shipping_region_id', 'shipping_region_id is required').trim().isNumeric();
     validator.bodyHandler(req, res, next);
+  },
+  productReviewRequestBody: (req, res, next) => {
+    req.check('review', 'review is required').trim().notEmpty();
+    req.check('rating', 'rating is required').trim().notEmpty();
+    req.check('rating', 'rating must be a number').trim().isNumber();
+    validator.bodyHandler(req, res, next);
   }
 };
+
 
 export default verifyUserInput;
